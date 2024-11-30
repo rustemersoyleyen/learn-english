@@ -3,14 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ünite Seçimi</title>
+  <title>Egzersiz Sistemi</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
+  <!-- Ünite Seçim Ekranı -->
+  <div id="unit-selection-screen" class="screen">
     <h1>Ünite Seçimi</h1>
     <div id="unit-list" class="unit-list"></div>
   </div>
+
+  <!-- Egzersiz Ekranı -->
+  <div id="exercise-screen" class="screen hidden">
+    <h1>Kelime Egzersizi</h1>
+    <div id="exercise-info">
+      <div id="question"></div>
+      <div id="options" class="options"></div>
+    </div>
+    <button id="check-answer">Cevabı Kontrol Et</button>
+    <button id="back-to-units">Üniteye Dön</button>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
