@@ -13,15 +13,27 @@
     <div id="unit-list" class="unit-list"></div>
   </div>
 
+  <!-- Egzersiz Seçim Ekranı -->
+  <div id="exercise-selection-screen" class="screen hidden">
+    <h1>Egzersiz Seçimi</h1>
+    <div class="exercise-options">
+      <button class="exercise-option" data-type="word-guess">Kelime Bulma</button>
+      <button class="exercise-option" data-type="word-writing">Kelime Yazma</button>
+      <button class="exercise-option" data-type="sentence-creation">Cümle Oluşturma</button>
+      <button class="exercise-option" data-type="sentence-completion">Cümle Tamamlama</button>
+    </div>
+    <button id="back-to-units">Geri</button>
+  </div>
+
   <!-- Egzersiz Ekranı -->
   <div id="exercise-screen" class="screen hidden">
-    <h1>Kelime Egzersizi</h1>
+    <h1>Egzersiz</h1>
     <div id="exercise-info">
       <div id="question"></div>
       <div id="options" class="options"></div>
     </div>
     <button id="check-answer">Cevabı Kontrol Et</button>
-    <button id="back-to-units">Üniteye Dön</button>
+    <button id="back-to-exercises">Egzersizlere Dön</button>
   </div>
 
   <script src="script.js"></script>

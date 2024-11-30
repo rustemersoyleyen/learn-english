@@ -1,12 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
     const unitSelectionScreen = document.getElementById('unit-selection-screen');
+    const exerciseSelectionScreen = document.getElementById('exercise-selection-screen');
     const exerciseScreen = document.getElementById('exercise-screen');
     const backToUnitsBtn = document.getElementById('back-to-units');
+    const backToExercisesBtn = document.getElementById('back-to-exercises');
     const questionDiv = document.getElementById('question');
     const optionsDiv = document.getElementById('options');
     let currentUnit = null;
+    let selectedExercise = null;
     let currentQuestionIndex = 0;
-    let selectedAnswer = null;
   
     // JSON'dan veri çekme
     fetch('data.json')
@@ -25,16 +27,23 @@ document.addEventListener('DOMContentLoaded', () => {
           <img src="${unit.unitImage}" alt="${unit.unitName}">
           <h3>${unit.unitName}</h3>
         `;
-        unitCard.addEventListener('click', () => startExercise(unit));
+        unitCard.addEventListener('click', () => openExerciseSelection(unit));
         unitList.appendChild(unitCard);
       });
     }
   
-    // Egzersiz başlatma
-    function startExercise(unit) {
+    // Egzersiz seçim ekranını aç
+    function openExerciseSelection(unit) {
       currentUnit = unit;
-      currentQuestionIndex = 0;
       unitSelectionScreen.classList.add('hidden');
+      exerciseSelectionScreen.classList.remove('hidden');
+    }
+  
+    // Egzersiz başlatma
+    function startExercise(exerciseType) {
+      selectedExercise = exerciseType;
+      currentQuestionIndex = 0;
+      exerciseSelectionScreen.classList.add('hidden');
       exerciseScreen.classList.remove('hidden');
       loadQuestion();
     }
@@ -42,16 +51,41 @@ document.addEventListener('DOMContentLoaded', () => {
     // Soru yükleme
     function loadQuestion() {
       const word = currentUnit.words[currentQuestionIndex];
+      if (!word) {
+        alert('Egzersiz tamamlandı!');
+        resetToUnits();
+        return;
+      }
+  
+      if (selectedExercise === 'word-guess') {
+        renderWordGuess(word);
+      } else if (selectedExercise === 'word-writing') {
+        renderWordWriting(word);
+      }
+      // Diğer egzersizler eklenecek...
+    }
+  
+    // Kelime Bulma Egzersizi
+    function renderWordGuess(word) {
       const direction = Math.random() > 0.5 ? 'tr-en' : 'en-tr';
       const questionText = direction === 'tr-en' ? word.turkish : word.english;
       const correctAnswer = direction === 'tr-en' ? word.english : word.turkish;
   
       questionDiv.innerHTML = `<p>${questionText}</p><img src="${word.image}" alt="Kelime Görseli">`;
       generateOptions(correctAnswer, direction);
-      textToSpeech(questionText, 'tr'); // Soruyu seslendir
+      textToSpeech(questionText, 'tr');
     }
   
-    // Seçenekleri oluşturma
+    // Kelime Yazma Egzersizi
+    function renderWordWriting(word) {
+      const direction = Math.random() > 0.5 ? 'tr-en' : 'en-tr';
+      const questionText = direction === 'tr-en' ? word.turkish : word.english;
+      questionDiv.innerHTML = `<p>${questionText}</p><img src="${word.image}" alt="Kelime Görseli">`;
+      optionsDiv.innerHTML = `<input type="text" id="answer-input" placeholder="Cevabınızı yazın">`;
+      textToSpeech(questionText, 'tr');
+    }
+  
+    // Seçenek oluşturma
     function generateOptions(correctAnswer, direction) {
       optionsDiv.innerHTML = '';
       const allOptions = [...currentUnit.words.map((w) => (direction === 'tr-en' ? w.english : w.turkish))];
@@ -64,36 +98,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const btn = document.createElement('button');
         btn.textContent = option;
         btn.addEventListener('click', () => {
-          selectedAnswer = option;
-          checkAnswer(correctAnswer);
+          alert(option === correctAnswer ? 'Doğru!' : 'Yanlış!');
+          currentQuestionIndex++;
+          loadQuestion();
         });
         optionsDiv.appendChild(btn);
       });
-    }
-  
-    // Cevabı kontrol et
-    function checkAnswer(correctAnswer) {
-      if (selectedAnswer === correctAnswer) {
-        alert('Doğru!');
-        textToSpeech('Tebrikler!', 'tr');
-      } else {
-        alert('Yanlış!');
-        textToSpeech('Tekrar deneyin.', 'tr');
-      }
-  
-      currentQuestionIndex++;
-      if (currentQuestionIndex < currentUnit.words.length) {
-        loadQuestion();
-      } else {
-        alert('Egzersiz tamamlandı!');
-        reset();
-      }
-    }
-  
-    // Ekranları sıfırlama
-    function reset() {
-      exerciseScreen.classList.add('hidden');
-      unitSelectionScreen.classList.remove('hidden');
     }
   
     // Rastgele karıştırma
@@ -108,7 +118,19 @@ document.addEventListener('DOMContentLoaded', () => {
       speechSynthesis.speak(utterance);
     }
   
-    // Geri dön butonu
-    backToUnitsBtn.addEventListener('click', reset);
+    // Geri butonları
+    backToUnitsBtn.addEventListener('click', resetToUnits);
+    backToExercisesBtn.addEventListener('click', resetToExercises);
+  
+    function resetToUnits() {
+      exerciseSelectionScreen.classList.add('hidden');
+      exerciseScreen.classList.add('hidden');
+      unitSelectionScreen.classList.remove('hidden');
+    }
+  
+    function resetToExercises() {
+      exerciseScreen.classList.add('hidden');
+      exerciseSelectionScreen.classList.remove('hidden');
+    }
   });
   

@@ -17,14 +17,16 @@ body {
     display: none;
   }
   
-  .unit-list {
+  .unit-list,
+  .exercise-options {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
   }
   
-  .unit-card {
+  .unit-card,
+  .exercise-option {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 10px;
@@ -37,13 +39,6 @@ body {
     width: 100%;
     height: auto;
     border-radius: 8px;
-  }
-  
-  .options {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 20px;
   }
   
   button {
@@ -59,10 +54,5 @@ body {
   
   button:hover {
     background-color: #0056b3;
-  }
-  
-  #question img {
-    max-width: 200px;
-    margin-top: 10px;
   }
   
