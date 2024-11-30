@@ -17,7 +17,7 @@ body {
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 80%;
+    width: 90%;
     max-width: 600px;
 }
 
@@ -31,6 +31,10 @@ body {
     font-size: 16px;
     border-radius: 5px;
     margin-bottom: 20px;
+    display: inline-block;
+    position: absolute;
+    top: 20px;
+    left: 20px;
 }
 
 .back-button:hover {
@@ -40,8 +44,15 @@ body {
 /* Başlık ve Puan */
 .header {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
     margin-bottom: 20px;
+}
+
+#unit-name {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
 }
 
 #language-display {
@@ -126,4 +137,56 @@ button:hover {
 
 .control-button:hover, .next-button:hover {
     background-color: #2980b9;
+}
+
+/* Responsive Tasarım */
+@media (max-width: 768px) {
+    .exercise-container {
+        width: 95%;
+    }
+
+    .back-button {
+        font-size: 14px;
+        top: 10px;
+        left: 10px;
+    }
+
+    #word {
+        font-size: 24px;
+    }
+
+    .option-button {
+        width: 100%;
+        font-size: 16px;
+    }
+
+    .control-button, .next-button {
+        width: 100%;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .exercise-container {
+        padding: 15px;
+    }
+
+    .back-button {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    #word {
+        font-size: 20px;
+    }
+
+    .option-button {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    .control-button, .next-button {
+        font-size: 14px;
+        padding: 10px;
+    }
 }
