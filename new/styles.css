@@ -1,58 +1,129 @@
+/* Genel Ayarlar */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f8ff;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-  }
-  
-  h1 {
-    text-align: center;
-  }
-  
-  .screen {
-    padding: 20px;
-  }
-  
-  .hidden {
-    display: none;
-  }
-  
-  .unit-list,
-  .exercise-options {
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
     justify-content: center;
-  }
-  
-  .unit-card,
-  .exercise-option {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 10px;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Egzersiz Konteyneri */
+.exercise-container {
     text-align: center;
-    width: 150px;
-    cursor: pointer;
-  }
-  
-  .unit-card img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-  }
-  
-  button {
-    margin: 10px 0;
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    background-color: #007bff;
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 600px;
+}
+
+/* Geri Butonu */
+.back-button {
+    background-color: #4CAF50;
     color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.back-button:hover {
+    background-color: #45a049;
+}
+
+/* Başlık ve Puan */
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+#language-display {
+    font-size: 18px;
+    color: #333;
+}
+
+#score {
+    font-size: 18px;
+    color: #333;
+}
+
+/* Kelime ve Görsel */
+.word-section {
+    margin-bottom: 20px;
+}
+
+#word {
+    font-size: 30px;
+    color: #007bff;
+    margin: 10px 0;
+}
+
+#word-image {
+    width: 250px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+button {
+    font-size: 18px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 15px;
+    margin: 10px 0;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+/* Seçenek Butonları */
+.options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.option-button {
+    background-color: #3498db;
+    color: white;
+    font-size: 18px;
+    padding: 15px;
+    margin: 10px 0;
+    width: 200px;
     cursor: pointer;
     border-radius: 5px;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
+}
+
+.option-button:hover {
+    background-color: #2980b9;
+}
+
+/* Aksiyon Butonları */
+.actions {
+    margin-top: 30px;
+}
+
+.control-button, .next-button {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 30px;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+.control-button:hover, .next-button:hover {
+    background-color: #2980b9;
+}

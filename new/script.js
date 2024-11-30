@@ -1,136 +1,41 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const unitSelectionScreen = document.getElementById('unit-selection-screen');
-    const exerciseSelectionScreen = document.getElementById('exercise-selection-screen');
-    const exerciseScreen = document.getElementById('exercise-screen');
-    const backToUnitsBtn = document.getElementById('back-to-units');
-    const backToExercisesBtn = document.getElementById('back-to-exercises');
-    const questionDiv = document.getElementById('question');
-    const optionsDiv = document.getElementById('options');
-    let currentUnit = null;
-    let selectedExercise = null;
-    let currentQuestionIndex = 0;
-  
-    // JSON'dan veri çekme
-    fetch('data.json')
-      .then((response) => response.json())
-      .then((data) => {
-        renderUnits(data.units);
-      });
-  
-    // Ünite listesi oluşturma
-    function renderUnits(units) {
-      const unitList = document.getElementById('unit-list');
-      units.forEach((unit) => {
-        const unitCard = document.createElement('div');
-        unitCard.classList.add('unit-card');
-        unitCard.innerHTML = `
-          <img src="${unit.unitImage}" alt="${unit.unitName}">
-          <h3>${unit.unitName}</h3>
-        `;
-        unitCard.addEventListener('click', () => openExerciseSelection(unit));
-        unitList.appendChild(unitCard);
-      });
-    }
-  
-    // Egzersiz seçim ekranını aç
-    function openExerciseSelection(unit) {
-      currentUnit = unit;
-      unitSelectionScreen.classList.add('hidden');
-      exerciseSelectionScreen.classList.remove('hidden');
-    }
-  
-    // Egzersiz başlatma
-    function startExercise(exerciseType) {
-      selectedExercise = exerciseType;
-      currentQuestionIndex = 0;
-      exerciseSelectionScreen.classList.add('hidden');
-      exerciseScreen.classList.remove('hidden');
-      loadQuestion();
-    }
-  
-    // Soru yükleme
-    function loadQuestion() {
-      const word = currentUnit.words[currentQuestionIndex];
-      if (!word) {
-        alert('Egzersiz tamamlandı!');
-        resetToUnits();
+let score = 0;
+let correctAnswer = "saçlarımı taramak"; // Örnek doğru cevap
+
+// Sesli Okuma Fonksiyonu
+function playAudio() {
+    const audio = new Audio('path_to_audio_file.mp3');  // Ses dosyasını burada belirtin
+    audio.play();
+}
+
+// Cevap Kontrol Fonksiyonu
+function checkAnswer() {
+    const selectedOption = document.querySelector('.option-button.selected');
+    if (!selectedOption) {
+        alert('Lütfen bir seçenek seçin!');
         return;
-      }
-  
-      if (selectedExercise === 'word-guess') {
-        renderWordGuess(word);
-      } else if (selectedExercise === 'word-writing') {
-        renderWordWriting(word);
-      }
-      // Diğer egzersizler eklenecek...
     }
-  
-    // Kelime Bulma Egzersizi
-    function renderWordGuess(word) {
-      const direction = Math.random() > 0.5 ? 'tr-en' : 'en-tr';
-      const questionText = direction === 'tr-en' ? word.turkish : word.english;
-      const correctAnswer = direction === 'tr-en' ? word.english : word.turkish;
-  
-      questionDiv.innerHTML = `<p>${questionText}</p><img src="${word.image}" alt="Kelime Görseli">`;
-      generateOptions(correctAnswer, direction);
-      textToSpeech(questionText, 'tr');
+    
+    if (selectedOption.textContent === correctAnswer) {
+        alert('Tebrikler, doğru cevap!');
+        score += 3;
+    } else {
+        alert('Yanlış cevap, tekrar deneyin!');
+        score -= 1;
     }
-  
-    // Kelime Yazma Egzersizi
-    function renderWordWriting(word) {
-      const direction = Math.random() > 0.5 ? 'tr-en' : 'en-tr';
-      const questionText = direction === 'tr-en' ? word.turkish : word.english;
-      questionDiv.innerHTML = `<p>${questionText}</p><img src="${word.image}" alt="Kelime Görseli">`;
-      optionsDiv.innerHTML = `<input type="text" id="answer-input" placeholder="Cevabınızı yazın">`;
-      textToSpeech(questionText, 'tr');
-    }
-  
-    // Seçenek oluşturma
-    function generateOptions(correctAnswer, direction) {
-      optionsDiv.innerHTML = '';
-      const allOptions = [...currentUnit.words.map((w) => (direction === 'tr-en' ? w.english : w.turkish))];
-      shuffleArray(allOptions);
-      const options = allOptions.slice(0, 3);
-      options.push(correctAnswer);
-      shuffleArray(options);
-  
-      options.forEach((option) => {
-        const btn = document.createElement('button');
-        btn.textContent = option;
-        btn.addEventListener('click', () => {
-          alert(option === correctAnswer ? 'Doğru!' : 'Yanlış!');
-          currentQuestionIndex++;
-          loadQuestion();
-        });
-        optionsDiv.appendChild(btn);
-      });
-    }
-  
-    // Rastgele karıştırma
-    function shuffleArray(array) {
-      return array.sort(() => Math.random() - 0.5);
-    }
-  
-    // Text-to-Speech
-    function textToSpeech(text, lang) {
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = lang;
-      speechSynthesis.speak(utterance);
-    }
-  
-    // Geri butonları
-    backToUnitsBtn.addEventListener('click', resetToUnits);
-    backToExercisesBtn.addEventListener('click', resetToExercises);
-  
-    function resetToUnits() {
-      exerciseSelectionScreen.classList.add('hidden');
-      exerciseScreen.classList.add('hidden');
-      unitSelectionScreen.classList.remove('hidden');
-    }
-  
-    function resetToExercises() {
-      exerciseScreen.classList.add('hidden');
-      exerciseSelectionScreen.classList.remove('hidden');
-    }
-  });
-  
+
+    document.getElementById('score').textContent = `Puan: ${score}`;
+}
+
+// Sonraki Egzersize Geçiş Fonksiyonu
+function nextExercise() {
+    // Yeni egzersizlere geçiş fonksiyonu
+    alert('Sonraki egzersize geçiliyor...');
+}
+
+// Seçenekleri Seçme
+document.querySelectorAll('.option-button').forEach(button => {
+    button.addEventListener('click', () => {
+        document.querySelectorAll('.option-button').forEach(b => b.classList.remove('selected'));
+        button.classList.add('selected');
+    });
+});
