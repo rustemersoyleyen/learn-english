@@ -102,6 +102,32 @@
                 { "english": "We hardly ever see them anymore.", "turkish": "Onları artık neredeyse hiç görmüyoruz." },
                 { "english": "She never arrives on time.", "turkish": "Asla zamanında gelmez." }
             ]
-        }
+        },
+        {
+            
+                "id": 4,
+                "name": "Unit 4",
+                "image": "Unit4.jpg",
+                "wordPairs": [
+                    { "word": "get up", "translation": "kalkmak" },
+                    { "word": "get dressed", "translation": "giyinmek" },
+                    { "word": "have breakfast", "translation": "kahvaltı yapmak" },
+                    { "word": "go to school", "translation": "okula gitmek" },
+                    { "word": "have lunch", "translation": "öğle yemeği yemek" },
+                    { "word": "do homework", "translation": "ödev yapmak" },
+                    { "word": "have dinner", "translation": "akşam yemeği yemek" }
+                ],
+                "sentences": [
+                { "english": "I get up at seven.", "turkish": "Saat yedide kalkarım." },
+                { "english": "I get dressed.", "turkish": "Giyinirim." },
+                { "english": "I have breakfast at eight.", "turkish": "Saat sekizde kahvaltı yaparım." },
+                { "english": "I go to school at nine.", "turkish": "Saat dokuzda okula giderim." },
+                { "english": "I have lunch at twelve.", "turkish": "Saat on ikide öğle yemeği yerim." },
+                { "english": "I do my homework after school.", "turkish": "Okuldan sonra ödevimi yaparım." },
+                { "english": "I have dinner at seven.", "turkish": "Saat yedide akşam yemeği yerim." },
+                { "english": "I go to bed at ten.", "turkish": "Saat onda yatarım." }
+                ]
+        }      
+        
     ]
 }
