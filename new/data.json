@@ -1,10 +1,10 @@
 {
     "units": [
         {
-            "id": 3,
-            "name": "Unit 3",
-            "image": "Unit3.jpg",
-            "wordPairs": [
+            
+            "unitName": "Unit 3",
+            "unitImage": "Unit3.jpg",
+            "words": [
                 { "english": "get up", "turkish": "kalkmak", "image": "get_up.jpeg" },
                 { "english": "get dressed", "turkish": "giyinmek", "image": "get_dressed.jpeg" },
                 { "english": "have breakfast", "turkish": "kahvaltı yapmak", "image": "have_breakfast.jpeg" },
@@ -65,10 +65,10 @@
             ]
         },
         {
-            "id": 4,
-            "name": "Unit 4",
-            "image": "Unit4.jpg",
-            "wordPairs": [
+            
+            "unitName": "Unit 4",
+            "unitImage": "Unit4.jpg",
+            "words": [
                 { "english": "get up", "turkish": "kalkmak", "image": "get_up.jpeg" },
                 { "english": "get dressed", "turkish": "giyinmek", "image": "get_dressed.jpeg" },
                 { "english": "have breakfast", "turkish": "kahvaltı yapmak", "image": "have_breakfast.jpeg" },
